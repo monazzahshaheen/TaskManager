@@ -18,7 +18,7 @@ TaskFlow is a full-stack project management web app with role-based access contr
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React 18, Vite, Tailwind CSS, React Query, React Router |
+| Frontend | React 18, Vite, Tailwind CSS |
 | Backend | Node.js, Express.js |
 | Database | PostgreSQL (via Prisma ORM) |
 | Auth | JWT (jsonwebtoken) + bcryptjs |
