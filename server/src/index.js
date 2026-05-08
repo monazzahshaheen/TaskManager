@@ -19,6 +19,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
@@ -29,7 +31,8 @@ app.use('/api/dashboard', dashboardRoutes);
 if (process.env.NODE_ENV === 'production') {
   const clientBuild = path.join(__dirname, '../../client/dist');
   app.use(express.static(clientBuild));
-  app.get('*', (req, res) => {
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path === '/health') return next();
     res.sendFile(path.join(clientBuild, 'index.html'));
   });
 }
