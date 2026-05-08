@@ -1,18 +1,16 @@
 # TaskFlow — Project Management App
 
-A full-stack project management web app with role-based access control, built with React + Node.js + PostgreSQL.
+TaskFlow is a full-stack project management web app with role-based access control and is built using React (Frontend) + Node.js (Backend) + PostgreSQL (Database).
 
 ## Live Demo
-> Deploy URL goes here after Railway deployment
+> https://taskmanager-production-1246.up.railway.app
 
 ## Features
 
 - **Authentication** — JWT-based signup/login
 - **Projects** — Create, edit, delete projects with team members
-- **Role-Based Access** — Admin (full control) vs Member (view + update task status)
+- **Role-Based Access** — Admin (has full control) vs Member (can view and update task status)
 - **Task Management** — Create tasks with title, description, priority, due date, assignee
-- **Kanban Board** — Drag-friendly board view grouped by status (To Do / In Progress / Review / Done)
-- **List View** — Filterable table view with inline status updates
 - **Dashboard** — Overview of projects, task status breakdown, overdue alerts, recent activity
 - **Team Management** — Invite members by email, promote/demote roles, remove members
 
@@ -65,38 +63,13 @@ Open http://localhost:5173
 3. Add a **PostgreSQL** service from Railway's template
 4. Set environment variables in Railway dashboard:
    ```
-   DATABASE_URL=<Railway provides this automatically>
-   JWT_SECRET=<generate a secure random string>
-   NODE_ENV=production
-   CLIENT_URL=<your Railway app URL>
+   DATABASE_URL = <Railway provides this automatically after you add a database to railway>
+   JWT_SECRET = <generate a secure random string>
+   NODE_ENV = production
+   CLIENT_URL = <your Railway app URL>
    ```
 5. Railway auto-runs `npm run build` (builds React) then `npm start` (serves Express)
 6. Run `npx prisma db push` via Railway's shell or set it as a release command
-
-## API Endpoints
-
-| Method | Path | Description | Auth |
-|--------|------|-------------|------|
-| POST | `/api/auth/signup` | Register | — |
-| POST | `/api/auth/login` | Login | — |
-| GET | `/api/auth/me` | Current user | ✓ |
-| GET | `/api/projects` | List user's projects | ✓ |
-| POST | `/api/projects` | Create project | ✓ |
-| GET | `/api/projects/:id` | Project detail | ✓ Member |
-| PUT | `/api/projects/:id` | Update project | ✓ Admin |
-| DELETE | `/api/projects/:id` | Delete project | ✓ Owner |
-| POST | `/api/projects/:id/members` | Add member | ✓ Admin |
-| DELETE | `/api/projects/:id/members/:uid` | Remove member | ✓ Admin |
-| PATCH | `/api/projects/:id/members/:uid` | Update role | ✓ Admin |
-| GET | `/api/tasks/project/:id` | List tasks | ✓ Member |
-| POST | `/api/tasks/project/:id` | Create task | ✓ Member |
-| GET | `/api/tasks/:id` | Task detail | ✓ Member |
-| PUT | `/api/tasks/:id` | Update task | ✓ Member* |
-| DELETE | `/api/tasks/:id` | Delete task | ✓ Admin |
-| GET | `/api/users/search?email=` | Search users | ✓ |
-| GET | `/api/dashboard` | Dashboard stats | ✓ |
-
-\* Members can only update `status` field; Admins can update all fields.
 
 ## Role-Based Access Control
 
